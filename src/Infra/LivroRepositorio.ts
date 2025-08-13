@@ -9,8 +9,18 @@ export default class LivroRepositorio {
         this.dbPath = path.join(__dirname, caminho);
     }
 
-    acessarDB(): DBSchema {
+    private acessarDB(): DBSchema {
         const db = fs.readFileSync(this.dbPath, 'utf8');
         return JSON.parse(db);
+    }
+
+    private salvarDB(db: DBSchema): boolean {
+        try {
+            fs.writeFileSync(this.dbPath, JSON.stringify(db, null, 2));
+            return true;
+        } catch (error) {
+            console.error('Erro ao salvar o banco de dados:', error);
+            return false;
+        }
     }
 }

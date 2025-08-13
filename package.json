@@ -1,0 +1,40 @@
+{
+    "name": "infnet-backend-typescript",
+    "version": "1.0.0",
+    "description": "Backend básico em TypeScript",
+    "main": "dist/main.js",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/main.js",
+        "dev": "node --loader ts-node/esm src/main.ts",
+        "dev:watch": "nodemon --exec \"node --loader ts-node/esm\" src/main.ts",
+        "watch": "tsc --watch",
+        "lint": "eslint src/**/*.ts",
+        "lint:fix": "eslint src/**/*.ts --fix"
+    },
+    "keywords": [
+        "typescript",
+        "backend",
+        "express"
+    ],
+    "author": "João Victor",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.18.2"
+    },
+    "devDependencies": {
+        "@eslint/json": "^0.13.1",
+        "@eslint/markdown": "^7.1.0",
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.10.0",
+        "@typescript-eslint/utils": "^8.39.1",
+        "eslint": "^9.33.0",
+        "globals": "^16.3.0",
+        "jiti": "^2.5.1",
+        "nodemon": "^3.0.2",
+        "ts-node": "^10.9.1",
+        "typescript": "~5.3.3",
+        "typescript-eslint": "^8.39.1"
+    }
+}

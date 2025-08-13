@@ -1,6 +1,8 @@
 import { DBSchema } from './DBSchema';
 import path from 'path';
 import fs from 'fs';
+import { LivroSchema } from './LivroSchema';
+import { Livro } from '../livros';
 
 export default class LivroRepositorio {
     dbPath: string;
@@ -22,5 +24,24 @@ export default class LivroRepositorio {
             console.error('Erro ao salvar o banco de dados:', error);
             return false;
         }
+    }
+
+    public listarLivros(): LivroSchema[] {
+        const db = this.acessarDB();
+        return db.livros;
+    }
+
+    public getLivroPorId(id: string): LivroSchema | null {
+        const db = this.acessarDB();
+        return db.livros.find((livro) => livro.id === id) || null;
+    }
+
+    public criarLivro(livro: Livro): LivroSchema[] {
+        const livros = this.listarLivros();
+        livros.push({ ...livro });
+        const dbUpdated = this.acessarDB();
+        dbUpdated.livros = livros;
+        this.salvarDB(dbUpdated);
+        return livros;
     }
 }

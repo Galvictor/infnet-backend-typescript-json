@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response } from 'express';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -7,17 +7,17 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Rota básica
-app.get("/", (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
     res.json({
-        message: "Backend TypeScript funcionando!",
+        message: 'Backend TypeScript funcionando!',
         timestamp: new Date().toISOString(),
     });
 });
 
 // Rota de exemplo
-app.get("/api/status", (req: Request, res: Response) => {
+app.get('/api/status', (req: Request, res: Response) => {
     res.json({
-        status: "online",
+        status: 'online',
         uptime: process.uptime(),
     });
 });

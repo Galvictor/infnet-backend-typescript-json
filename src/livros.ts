@@ -24,3 +24,9 @@ export type ViewLivroDTO = {
     autor: string;
     ano: number;
 };
+
+export type AtualizarLivroDTO = {
+    titulo?: string;
+    autor?: string;
+    ano?: number;
+};

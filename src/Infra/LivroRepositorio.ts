@@ -44,4 +44,17 @@ export default class LivroRepositorio {
         this.salvarDB(dbUpdated);
         return livros;
     }
+
+    public atualizarLivro(id: number, dadosAtualizados: Partial<LivroSchema>): LivroSchema | null {
+        const db = this.acessarDB();
+        const index = db.livros.findIndex((livro) => livro.id === id);
+
+        if (index === -1) {
+            return null;
+        }
+
+        db.livros[index] = { ...db.livros[index], ...dadosAtualizados };
+        this.salvarDB(db);
+        return db.livros[index];
+    }
 }

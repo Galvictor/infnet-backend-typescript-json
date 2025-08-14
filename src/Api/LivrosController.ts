@@ -1,6 +1,6 @@
 import LivroRepositorio from '../Infra/LivroRepositorio';
 import { Router, Request, Response } from 'express';
-import { CriarLivroDTO, Livro, ViewLivroDTO } from '../livros';
+import { CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO } from '../livros';
 
 export default class LivrosController {
     private readonly livroRepositorio: LivroRepositorio;
@@ -15,6 +15,7 @@ export default class LivrosController {
         this.router.get('/', this.listarLivros.bind(this));
         this.router.get('/:id', this.getLivroPorId.bind(this));
         this.router.post('/', this.criarLivro.bind(this));
+        this.router.put('/:id', this.atualizarLivro.bind(this));
     }
 
     public listarLivros(req: Request, res: Response) {
@@ -42,5 +43,18 @@ export default class LivrosController {
         this.livroRepositorio.criarLivro(livroCriado);
         const livros = this.livroRepositorio.listarLivros();
         res.json(livros);
+    }
+
+    public atualizarLivro(req: Request, res: Response) {
+        const id = +req.params.id;
+        const dadosAtualizados: AtualizarLivroDTO = req.body;
+
+        const livroAtualizado = this.livroRepositorio.atualizarLivro(id, dadosAtualizados);
+
+        if (livroAtualizado) {
+            res.json(livroAtualizado);
+        } else {
+            res.status(404).json({ message: 'Livro atualizado com sucesso' });
+        }
     }
 }

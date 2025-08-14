@@ -1,6 +1,6 @@
 # Backend TypeScript Básico
 
-Um servidor backend simples construído com TypeScript e Express.
+Um servidor backend simples construído com TypeScript e Express, configurado para usar CommonJS.
 
 ## 🚀 Como usar
 
@@ -32,9 +32,11 @@ npm start
 ## 📁 Estrutura do projeto
 
 -   `src/main.ts` - Arquivo principal do servidor
+-   `src/Api/` - Controladores e rotas da API
+-   `src/Infra/` - Repositórios e esquemas de dados
 -   `dist/` - Arquivos compilados (criado após build)
 -   `package.json` - Dependências e scripts
--   `tsconfig.json` - Configuração do TypeScript
+-   `tsconfig.json` - Configuração do TypeScript (CommonJS)
 -   `eslint.config.ts` - Configuração moderna do ESLint (flat config)
 -   `nodemon.json` - Configuração do Nodemon
 
@@ -52,6 +54,8 @@ npm start
 
 -   `GET /` - Página inicial com mensagem de boas-vindas
 -   `GET /api/status` - Status do servidor
+-   `GET /api/livros` - Lista todos os livros
+-   `GET /api/livros/:id` - Busca livro por ID
 
 ## 📝 Tecnologias utilizadas
 
@@ -60,6 +64,15 @@ npm start
 -   Node.js
 -   ESLint 9.x (configuração moderna flat config)
 -   Nodemon (para auto-reload em desenvolvimento)
+
+## ⚙️ Configuração TypeScript
+
+O projeto está configurado para usar **CommonJS**:
+
+-   **`"module": "CommonJS"`** - Permite usar `__dirname` diretamente
+-   **`"moduleResolution": "node10"`** - Resolução de módulos estilo Node.js
+-   **`"types": ["node"]`** - Inclui definições de tipos do Node.js
+-   **Sem `"type": "module"`** - Padrão CommonJS
 
 ## 🧹 Qualidade do Código
 
@@ -70,8 +83,8 @@ O projeto inclui ESLint 9.x configurado com a nova sintaxe flat config:
 -   Regras específicas para TypeScript
 -   Formatação automática do código
 -   Detecção de problemas comuns
--   Suporte a módulos ES
--   Reconhecimento de variáveis globais do Node.js
+-   Suporte a módulos CommonJS
+-   Reconhecimento de variáveis globais do Node.js (incluindo `__dirname`)
 -   Suporte nativo a arquivos de configuração TypeScript
 
 ## 🔄 Auto-reload com Nodemon
@@ -83,11 +96,26 @@ O projeto inclui Nodemon configurado para:
 -   Ignorar arquivos de teste e build
 -   Delay de 1 segundo para evitar reinicializações excessivas
 
-## ⚡ Configuração Moderna
+## 🎯 Funcionalidades
 
--   **ESLint 9.x**: Versão mais recente com suporte nativo a TypeScript
--   **Flat Config**: Nova sintaxe mais limpa e eficiente
--   **Módulos ES**: Suporte nativo a import/export
--   **TypeScript**: Configuração otimizada para desenvolvimento moderno
--   **Versão Compatível**: TypeScript 5.3.3 para máxima compatibilidade
--   **Configuração TypeScript**: ESLint configurado em `.ts` para melhor tipagem
+-   **API REST** com Express
+-   **Repositório de dados** usando arquivo JSON
+-   **Tipagem forte** com TypeScript
+-   **Estrutura modular** com separação de responsabilidades
+-   **Hot reload** em desenvolvimento
+-   **Build otimizado** para produção
+
+## 📊 Banco de Dados
+
+-   **fakeDB.json** - Arquivo JSON com dados de exemplo
+-   **LivroRepositorio** - Classe para gerenciar operações CRUD
+-   **Esquemas tipados** - Interfaces TypeScript para validação
+
+## 🚀 Deploy
+
+Para fazer deploy em produção:
+
+1. Execute `npm run build` para compilar
+2. Use `npm start` para executar a versão compilada
+3. Configure variáveis de ambiente se necessário
+4. Use um process manager como PM2 para produção

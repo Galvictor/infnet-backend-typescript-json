@@ -63,7 +63,7 @@ export default class LivroRepositorio {
         return db.livros[index];
     }
 
-    public deletarLivro(id: number): boolean {
+    public deletarLivroPorId(id: number): boolean {
         const db = this.acessarDB();
         const index = db.livros.findIndex((livro) => livro.id === id);
 

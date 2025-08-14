@@ -16,7 +16,7 @@ export default class LivrosController {
         this.router.get('/:id', this.getLivroPorId.bind(this));
         this.router.post('/', this.criarLivro.bind(this));
         this.router.patch('/:id', this.atualizarLivroPorId.bind(this));
-        this.router.delete('/:id', this.deletarLivro.bind(this));
+        this.router.delete('/:id', this.deletarLivroPorId.bind(this));
     }
 
     public listarLivros(req: Request, res: Response) {
@@ -61,9 +61,9 @@ export default class LivrosController {
         }
     }
 
-    public deletarLivro(req: Request, res: Response) {
+    public deletarLivroPorId(req: Request, res: Response) {
         const id = +req.params.id;
-        const deletado = this.livroRepositorio.deletarLivro(id);
+        const deletado = this.livroRepositorio.deletarLivroPorId(id);
 
         if (deletado) {
             res.json({ message: 'Livro deletado com sucesso' });

@@ -15,7 +15,7 @@ export default class LivrosController {
         this.router.get('/', this.listarLivros.bind(this));
         this.router.get('/:id', this.getLivroPorId.bind(this));
         this.router.post('/', this.criarLivro.bind(this));
-        this.router.put('/:id', this.atualizarLivro.bind(this));
+        this.router.patch('/:id', this.atualizarLivroPorId.bind(this));
         this.router.delete('/:id', this.deletarLivro.bind(this));
     }
 
@@ -48,11 +48,11 @@ export default class LivrosController {
         res.json(livros);
     }
 
-    public atualizarLivro(req: Request, res: Response) {
+    public atualizarLivroPorId(req: Request, res: Response) {
         const id = +req.params.id;
         const dadosAtualizados: AtualizarLivroDTO = req.body;
 
-        const livroAtualizado = this.livroRepositorio.atualizarLivro(id, dadosAtualizados);
+        const livroAtualizado = this.livroRepositorio.atualizarLivroPorId(id, dadosAtualizados);
 
         if (livroAtualizado) {
             res.json(livroAtualizado);

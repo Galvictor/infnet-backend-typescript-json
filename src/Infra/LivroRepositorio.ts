@@ -45,7 +45,7 @@ export default class LivroRepositorio {
         return livros;
     }
 
-    public atualizarLivro(id: number, dadosAtualizados: AtualizarLivroDTO): LivroSchema | null {
+    public atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): LivroSchema | null {
         const db = this.acessarDB();
         const index = db.livros.findIndex((livro) => livro.id === id);
 

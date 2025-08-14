@@ -37,10 +37,10 @@ export type AtualizarLivroDTO = Partial<Livro>;
 //    ano?: number;
 //};
 
-//export type AtualizarLivroDTO = Pick<Livro, 'titulo' | 'autor' | 'ano'>;
+//export type ExemploLivroDTO = Pick<Livro, 'titulo' | 'autor' | 'ano'>;
 
 //para estudo isso ai é igual a pegar o titulo, autor e ano do livro:
-//export type AtualizarLivroDTO = {
+//export type ExemploLivroDTO = {
 //    titulo?: string;
 //    autor?: string;
 //    ano?: number;

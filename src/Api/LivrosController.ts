@@ -40,7 +40,9 @@ export default class LivrosController {
 
     public criarLivro(req: Request, res: Response) {
         const dadosLivro: CriarLivroDTO = req.body;
-        const livroCriado = new Livro(dadosLivro.titulo, dadosLivro.autor, dadosLivro.ano);
+        const Listarlivros = this.livroRepositorio.listarLivros();
+        const novoId = Listarlivros.map((livro) => livro.id).reduce((a, b) => Math.max(a, b), 0) + 1;
+        const livroCriado = new Livro(novoId, dadosLivro.titulo, dadosLivro.autor, dadosLivro.ano);
         this.livroRepositorio.criarLivro(livroCriado);
         const livros = this.livroRepositorio.listarLivros();
         res.json(livros);

@@ -1,6 +1,6 @@
 import LivroRepositorio from '../Infra/LivroRepositorio';
 import { Router, Request, Response } from 'express';
-import { ViewLivroDTO } from '../livros';
+import { CriarLivroDTO, Livro, ViewLivroDTO } from '../livros';
 
 export default class LivrosController {
     private readonly livroRepositorio: LivroRepositorio;
@@ -14,6 +14,7 @@ export default class LivrosController {
     public routes() {
         this.router.get('/', this.listarLivros.bind(this));
         this.router.get('/:id', this.getLivroPorId.bind(this));
+        this.router.post('/', this.criarLivro.bind(this));
     }
 
     public listarLivros(req: Request, res: Response) {
@@ -33,5 +34,13 @@ export default class LivrosController {
         } else {
             res.status(404).json({ message: 'Livro não encontrado' });
         }
+    }
+
+    public criarLivro(req: Request, res: Response) {
+        const dadosLivro: CriarLivroDTO = req.body;
+        const livroCriado = new Livro(dadosLivro.titulo, dadosLivro.autor, dadosLivro.ano);
+        this.livroRepositorio.criarLivro(livroCriado);
+        const livros = this.livroRepositorio.listarLivros();
+        res.json(livros);
     }
 }

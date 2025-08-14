@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import routes from './Api/routes';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -12,6 +13,8 @@ app.get('/', (req: Request, res: Response) => {
         timestamp: new Date().toISOString(),
     });
 });
+
+app.use('/api', routes);
 
 // Rota de exemplo
 app.get('/api/status', (req: Request, res: Response) => {

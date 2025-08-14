@@ -11,8 +11,8 @@ export default class LivrosController {
     }
 
     public routes() {
-        this.router.get('/livros', this.listarLivros.bind(this));
-        this.router.get('/livros/:id', this.getLivroPorId.bind(this));
+        this.router.get('/', this.listarLivros.bind(this));
+        this.router.get('/:id', this.getLivroPorId.bind(this));
     }
 
     public listarLivros(req: Request, res: Response) {

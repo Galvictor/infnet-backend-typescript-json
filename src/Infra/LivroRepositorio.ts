@@ -31,7 +31,7 @@ export default class LivroRepositorio {
         return db.livros;
     }
 
-    public getLivroPorId(id: string): LivroSchema | null {
+    public getLivroPorId(id: number): LivroSchema | null {
         const db = this.acessarDB();
         return db.livros.find((livro) => livro.id === id) || null;
     }

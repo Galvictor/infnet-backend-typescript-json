@@ -1,5 +1,5 @@
 export type LivroSchema = {
-    id: string;
+    id: number;
     titulo: string;
     autor: string;
     ano: number;

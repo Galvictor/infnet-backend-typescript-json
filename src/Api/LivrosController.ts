@@ -22,7 +22,7 @@ export default class LivrosController {
 
     public getLivroPorId(req: Request, res: Response) {
         const id = req.params.id;
-        const livro = this.livroRepositorio.getLivroPorId(id);
+        const livro = this.livroRepositorio.getLivroPorId(+id);
         if (livro) {
             res.json(livro);
         } else {

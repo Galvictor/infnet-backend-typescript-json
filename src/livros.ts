@@ -1,11 +1,11 @@
 export class Livro {
-    id: string;
+    id: number;
     titulo: string;
     autor: string;
     ano: number;
 
     constructor(id: string, titulo: string, autor: string, ano: number) {
-        this.id = id;
+        this.id = Math.round(Math.random() * 1000000);
         this.titulo = titulo;
         this.autor = autor;
         this.ano = ano;

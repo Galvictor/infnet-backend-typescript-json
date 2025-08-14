@@ -1,5 +1,6 @@
 import LivroRepositorio from '../Infra/LivroRepositorio';
 import { Router, Request, Response } from 'express';
+import { ViewLivroDTO } from '../livros';
 
 export default class LivrosController {
     private readonly livroRepositorio: LivroRepositorio;
@@ -24,7 +25,11 @@ export default class LivrosController {
         const id = req.params.id;
         const livro = this.livroRepositorio.getLivroPorId(+id);
         if (livro) {
-            res.json(livro);
+            const viewLivro: ViewLivroDTO = {
+                ...livro,
+            };
+
+            res.json(viewLivro);
         } else {
             res.status(404).json({ message: 'Livro não encontrado' });
         }

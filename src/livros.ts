@@ -19,7 +19,7 @@ export type CriarLivroDTO = {
 };
 
 export type ViewLivroDTO = {
-    id: string;
+    id: number;
     titulo: string;
     autor: string;
     ano: number;

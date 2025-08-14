@@ -3,14 +3,11 @@ import path from 'path';
 import fs from 'fs';
 import { LivroSchema } from './LivroSchema';
 import { Livro } from '../livros';
-import { fileURLToPath } from 'url';
 
 export default class LivroRepositorio {
     dbPath: string;
 
     constructor(caminho: string = 'fakeDB.json') {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
         this.dbPath = path.join(__dirname, caminho);
     }
 

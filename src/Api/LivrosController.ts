@@ -19,6 +19,8 @@ export default class LivrosController {
         this.router.delete('/:id', this.deletarLivroPorId.bind(this));
     }
 
+    // TODO: Validar bodies libs: Express validator ou Class validator
+
     public listarLivros(req: Request, res: Response) {
         const livros = this.livroRepositorio.listarLivros();
         res.json(livros);

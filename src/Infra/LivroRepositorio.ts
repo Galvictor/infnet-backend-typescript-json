@@ -57,4 +57,17 @@ export default class LivroRepositorio {
         this.salvarDB(db);
         return db.livros[index];
     }
+
+    public deletarLivro(id: number): boolean {
+        const db = this.acessarDB();
+        const index = db.livros.findIndex((livro) => livro.id === id);
+
+        if (index === -1) {
+            return false;
+        }
+
+        db.livros.splice(index, 1);
+        this.salvarDB(db);
+        return true;
+    }
 }

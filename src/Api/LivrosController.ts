@@ -16,6 +16,7 @@ export default class LivrosController {
         this.router.get('/:id', this.getLivroPorId.bind(this));
         this.router.post('/', this.criarLivro.bind(this));
         this.router.put('/:id', this.atualizarLivro.bind(this));
+        this.router.delete('/:id', this.deletarLivro.bind(this));
     }
 
     public listarLivros(req: Request, res: Response) {
@@ -54,7 +55,18 @@ export default class LivrosController {
         if (livroAtualizado) {
             res.json(livroAtualizado);
         } else {
-            res.status(404).json({ message: 'Livro atualizado com sucesso' });
+            res.status(404).json({ message: 'Livro não encontrado' });
+        }
+    }
+
+    public deletarLivro(req: Request, res: Response) {
+        const id = +req.params.id;
+        const deletado = this.livroRepositorio.deletarLivro(id);
+
+        if (deletado) {
+            res.json({ message: 'Livro deletado com sucesso' });
+        } else {
+            res.status(404).json({ message: 'Livro não encontrado' });
         }
     }
 }

@@ -28,7 +28,16 @@ export type ViewLivroDTO = {
     ano: number;
 };
 
-export type AtualizarLivroDTO = Pick<Livro, 'titulo' | 'autor' | 'ano'>;
+export type AtualizarLivroDTO = Partial<Livro>;
+
+//para estudo isso ai é igual a pegar o titulo, autor e ano do livro:
+//export type AtualizarLivroDTO = {
+//    titulo?: string;
+//    autor?: string;
+//    ano?: number;
+//};
+
+//export type AtualizarLivroDTO = Pick<Livro, 'titulo' | 'autor' | 'ano'>;
 
 //para estudo isso ai é igual a pegar o titulo, autor e ano do livro:
 //export type AtualizarLivroDTO = {

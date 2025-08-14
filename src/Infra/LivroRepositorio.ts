@@ -2,7 +2,7 @@ import { DBSchema } from './DBSchema';
 import path from 'path';
 import fs from 'fs';
 import { LivroSchema } from './LivroSchema';
-import { Livro } from '../livros';
+import { AtualizarLivroDTO, Livro } from '../livros';
 
 export default class LivroRepositorio {
     dbPath: string;
@@ -45,7 +45,7 @@ export default class LivroRepositorio {
         return livros;
     }
 
-    public atualizarLivro(id: number, dadosAtualizados: Partial<LivroSchema>): LivroSchema | null {
+    public atualizarLivro(id: number, dadosAtualizados: AtualizarLivroDTO): LivroSchema | null {
         const db = this.acessarDB();
         const index = db.livros.findIndex((livro) => livro.id === id);
 

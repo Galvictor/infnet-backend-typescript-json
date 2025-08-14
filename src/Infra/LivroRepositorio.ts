@@ -53,7 +53,12 @@ export default class LivroRepositorio {
             return null;
         }
 
-        db.livros[index] = { ...db.livros[index], ...dadosAtualizados };
+        db.livros[index] = {
+            ...db.livros[index],
+            ...dadosAtualizados,
+            id,
+        };
+
         this.salvarDB(db);
         return db.livros[index];
     }

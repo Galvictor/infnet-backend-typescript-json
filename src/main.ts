@@ -1,10 +1,19 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import routes from './Api/routes';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware para JSON
 app.use(express.json());
+
+function logRequest(req: Request, res: Response, next: NextFunction) {
+    console.log(`${req.method} ${req.url}`);
+    console.log(`Headers: ${JSON.stringify(req.headers)}`);
+    console.log(`Body: ${JSON.stringify(req.body)}`);
+    next();
+}
+
+app.use(logRequest);
 
 // Rota básica
 app.get('/', (req: Request, res: Response) => {

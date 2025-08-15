@@ -33,7 +33,11 @@ npm start
 
 -   `src/main.ts` - Arquivo principal do servidor
 -   `src/Api/` - Controladores e rotas da API
--   `src/Infra/` - Repositórios e esquemas de dados
+-   `src/Infra/` - Repositórios e banco de dados
+-   `src/entities/` - Entidades do domínio da aplicação
+-   `src/dtos/` - Data Transfer Objects para transferência de dados
+-   `src/schemas/` - Schemas e tipos do banco de dados
+-   `src/types/` - Arquivo de índice centralizando todas as exportações
 -   `dist/` - Arquivos compilados (criado após build)
 -   `package.json` - Dependências e scripts
 -   `tsconfig.json` - Configuração do TypeScript (CommonJS)
@@ -102,8 +106,22 @@ O projeto inclui Nodemon configurado para:
 -   **Repositório de dados** usando arquivo JSON
 -   **Tipagem forte** com TypeScript
 -   **Estrutura modular** com separação de responsabilidades
+-   **Organização profissional** com pastas específicas para cada tipo de arquivo
 -   **Hot reload** em desenvolvimento
 -   **Build otimizado** para produção
+
+## 🗂️ Organização do Código
+
+O projeto segue uma arquitetura limpa e organizada:
+
+-   **`entities/`** - Classes de entidades do domínio
+-   **`dtos/`** - Objetos de transferência de dados
+-   **`schemas/`** - Tipos e schemas do banco de dados
+-   **`types/`** - Arquivo centralizador de exportações
+-   **`Api/`** - Controladores e rotas da API
+-   **`Infra/`** - Repositórios e infraestrutura
+
+Esta organização facilita a manutenção, escalabilidade e legibilidade do código.
 
 ## 📊 Banco de Dados
 

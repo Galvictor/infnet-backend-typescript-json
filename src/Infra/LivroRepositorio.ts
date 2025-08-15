@@ -1,8 +1,6 @@
-import { DBSchema } from './DBSchema';
+import { DBSchema, LivroSchema, AtualizarLivroDTO, Livro } from '../types';
 import path from 'path';
 import fs from 'fs';
-import { LivroSchema } from './LivroSchema';
-import { AtualizarLivroDTO, Livro } from '../livros';
 
 export default class LivroRepositorio {
     dbPath: string;

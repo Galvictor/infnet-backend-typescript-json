@@ -1,6 +1,6 @@
 import LivroRepositorio from '../Infra/LivroRepositorio';
 import { Router, Request, Response } from 'express';
-import { CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO } from '../livros';
+import { CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO } from '../types';
 
 export default class LivrosController {
     private readonly livroRepositorio: LivroRepositorio;

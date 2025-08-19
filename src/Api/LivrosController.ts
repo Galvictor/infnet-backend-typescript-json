@@ -79,7 +79,7 @@ export default class LivrosController {
         const livroCriado = new Livro(novoId, dadosLivro.titulo, dadosLivro.autor, dadosLivro.ano);
         this.livroRepositorio.criarLivro(livroCriado);
         const livros = this.livroRepositorio.listarLivros();
-        res.json(livros);
+        res.status(201).json(livros);
     }
 
     public atualizarLivroPorId(req: Request, res: Response) {

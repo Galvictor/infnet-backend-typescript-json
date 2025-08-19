@@ -1,6 +1,7 @@
 import LivroRepositorio from '../Infra/LivroRepositorio';
 import { Router, Request, Response } from 'express';
 import { CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO } from '../types';
+import { body, param } from 'express-validator';
 
 export default class LivrosController {
     private readonly livroRepositorio: LivroRepositorio;
@@ -13,13 +14,19 @@ export default class LivrosController {
 
     public routes() {
         this.router.get('/', this.listarLivros.bind(this));
-        this.router.get('/:id', this.getLivroPorId.bind(this));
-        this.router.post('/', this.criarLivro.bind(this));
-        this.router.patch('/:id', this.atualizarLivroPorId.bind(this));
-        this.router.delete('/:id', this.deletarLivroPorId.bind(this));
+        this.router.get('/:id', [param('id').isInt().withMessage('O ID deve ser um número inteiro')], this.getLivroPorId.bind(this));
+        this.router.post(
+            '/',
+            [
+                body('titulo').notEmpty().withMessage('O titulo é obrigatório'),
+                body('autor').notEmpty().withMessage('O autor é obrigatório'),
+                body('ano').notEmpty().withMessage('O ano é obrigatório'),
+            ],
+            this.criarLivro.bind(this)
+        );
+        this.router.patch('/:id', [param('id').isInt().withMessage('O ID deve ser um número inteiro')], this.atualizarLivroPorId.bind(this));
+        this.router.delete('/:id', [param('id').isInt().withMessage('O ID deve ser um número inteiro')], this.deletarLivroPorId.bind(this));
     }
-
-    // TODO: Validar bodies libs: Express validator ou Class validator
 
     public listarLivros(req: Request, res: Response) {
         const livros = this.livroRepositorio.listarLivros();

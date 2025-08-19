@@ -1,7 +1,7 @@
 import LivroRepositorio from '../Infra/LivroRepositorio';
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO } from '../types';
-import { body, param } from 'express-validator';
+import { body, param, validationResult } from 'express-validator';
 
 export default class LivrosController {
     private readonly livroRepositorio: LivroRepositorio;
@@ -14,18 +14,43 @@ export default class LivrosController {
 
     public routes() {
         this.router.get('/', this.listarLivros.bind(this));
-        this.router.get('/:id', [param('id').isInt().withMessage('O ID deve ser um número inteiro')], this.getLivroPorId.bind(this));
+        this.router.get(
+            '/:id',
+            [param('id').isInt().withMessage('O ID deve ser um número inteiro'), this.checkValidationErrors.bind(this)],
+            this.getLivroPorId.bind(this)
+        );
         this.router.post(
             '/',
             [
                 body('titulo').notEmpty().withMessage('O titulo é obrigatório'),
                 body('autor').notEmpty().withMessage('O autor é obrigatório'),
                 body('ano').notEmpty().withMessage('O ano é obrigatório'),
+                this.checkValidationErrors.bind(this),
             ],
             this.criarLivro.bind(this)
         );
-        this.router.patch('/:id', [param('id').isInt().withMessage('O ID deve ser um número inteiro')], this.atualizarLivroPorId.bind(this));
-        this.router.delete('/:id', [param('id').isInt().withMessage('O ID deve ser um número inteiro')], this.deletarLivroPorId.bind(this));
+        this.router.patch(
+            '/:id',
+            [param('id').isInt().withMessage('O ID deve ser um número inteiro'), this.checkValidationErrors.bind(this)],
+            this.atualizarLivroPorId.bind(this)
+        );
+        this.router.delete(
+            '/:id',
+            [param('id').isInt().withMessage('O ID deve ser um número inteiro'), this.checkValidationErrors.bind(this)],
+            this.deletarLivroPorId.bind(this)
+        );
+    }
+
+    // Middleware para verificar erros de validação
+    private checkValidationErrors(req: Request, res: Response, next: NextFunction) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                message: 'Erro de validação',
+                errors: errors.array(),
+            });
+        }
+        next();
     }
 
     public listarLivros(req: Request, res: Response) {

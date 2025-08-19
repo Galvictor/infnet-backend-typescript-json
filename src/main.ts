@@ -1,13 +1,13 @@
 import express, { Request, Response } from 'express';
-import routes from './Api/routes';
-import { logRequest } from './Infra/Logger';
+import Routes from './Api/routes';
+import Logger from './Infra/Logger';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware para JSON
 app.use(express.json());
 
-app.use(logRequest);
+app.use(Logger.init());
 
 // Rota básica
 app.get('/', (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ app.get('/', (req: Request, res: Response) => {
     });
 });
 
-app.use('/api', routes);
+app.use('/api', Routes.init());
 
 // Rota de exemplo
 app.get('/api/status', (req: Request, res: Response) => {

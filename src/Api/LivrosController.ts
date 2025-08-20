@@ -2,6 +2,7 @@ import LivroRepositorio from '../Infra/LivroRepositorio';
 import { Router, Request, Response, NextFunction } from 'express';
 import { CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO } from '../types';
 import { body, param, validationResult } from 'express-validator';
+import { NotFoundError } from './Exceptions/NotFoundError';
 
 export default class LivrosController {
     private readonly livroRepositorio: LivroRepositorio;
@@ -68,7 +69,8 @@ export default class LivrosController {
 
             res.json(viewLivro);
         } else {
-            res.status(404).json({ message: 'Livro não encontrado' });
+            //res.status(404).json({ message: 'Livro não encontrado' });
+            throw new NotFoundError('Livro não encontrado');
         }
     }
 
@@ -91,7 +93,8 @@ export default class LivrosController {
         if (livroAtualizado) {
             res.json(livroAtualizado);
         } else {
-            res.status(404).json({ message: 'Livro não encontrado' });
+            //res.status(404).json({ message: 'Livro não encontrado' });
+            throw new NotFoundError('Livro não encontrado');
         }
     }
 
@@ -102,7 +105,8 @@ export default class LivrosController {
         if (deletado) {
             res.json({ message: 'Livro deletado com sucesso' });
         } else {
-            res.status(404).json({ message: 'Livro não encontrado' });
+            //res.status(404).json({ message: 'Livro não encontrado' });
+            throw new NotFoundError('Livro não encontrado');
         }
     }
 }

@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import Routes from './Api/routes';
 import Logger from './Infra/Logger';
+import ErrorHandler from './Infra/ErrorHandler';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -26,6 +27,9 @@ app.get('/api/status', (req: Request, res: Response) => {
         uptime: process.uptime(),
     });
 });
+
+// ⚠️ IMPORTANTE: Middleware de erro deve ser o ÚLTIMO
+app.use(ErrorHandler.init());
 
 // Iniciar servidor
 app.listen(PORT, () => {

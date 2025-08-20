@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import CustomError from '../Api/Exceptions/CustomErros';
 
 class ErrorHandler {
-    private static tratarErro(err: Error, req: Request, res: Response) {
+    private static tratarErro(err: Error, req: Request, res: Response, next: NextFunction) {
         // Log do erro
         console.error('🚨 Erro:', {
             message: err.message,

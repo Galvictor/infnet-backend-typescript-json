@@ -59,7 +59,7 @@ export default class LivrosController {
         res.json(livros);
     }
 
-    public getLivroPorId(req: Request, res: Response) {
+    public getLivroPorId(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
         const livro = this.livroRepositorio.getLivroPorId(+id);
         if (livro) {
@@ -70,7 +70,7 @@ export default class LivrosController {
             res.json(viewLivro);
         } else {
             //res.status(404).json({ message: 'Livro não encontrado' });
-            throw new NotFoundError('Livro não encontrado');
+            next(new NotFoundError('Livro não encontrado'));
         }
     }
 
@@ -84,7 +84,7 @@ export default class LivrosController {
         res.status(201).json(livros);
     }
 
-    public atualizarLivroPorId(req: Request, res: Response) {
+    public atualizarLivroPorId(req: Request, res: Response, next: NextFunction) {
         const id = +req.params.id;
         const dadosAtualizados: AtualizarLivroDTO = req.body;
 
@@ -94,11 +94,11 @@ export default class LivrosController {
             res.json(livroAtualizado);
         } else {
             //res.status(404).json({ message: 'Livro não encontrado' });
-            throw new NotFoundError('Livro não encontrado');
+            next(new NotFoundError('Livro não encontrado'));
         }
     }
 
-    public deletarLivroPorId(req: Request, res: Response) {
+    public deletarLivroPorId(req: Request, res: Response, next: NextFunction) {
         const id = +req.params.id;
         const deletado = this.livroRepositorio.deletarLivroPorId(id);
 
@@ -106,7 +106,7 @@ export default class LivrosController {
             res.json({ message: 'Livro deletado com sucesso' });
         } else {
             //res.status(404).json({ message: 'Livro não encontrado' });
-            throw new NotFoundError('Livro não encontrado');
+            next(new NotFoundError('Livro não encontrado'));
         }
     }
 }

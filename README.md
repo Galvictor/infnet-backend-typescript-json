@@ -1,6 +1,6 @@
 # Backend TypeScript Básico
 
-Um servidor backend simples construído com TypeScript e Express, configurado para usar CommonJS.
+Um servidor backend simples construído com TypeScript e Express, configurado para usar CommonJS, com **autenticação JWT-style** e **validação de dados**.
 
 ## 🚀 Como usar
 
@@ -33,7 +33,7 @@ npm start
 
 -   `src/main.ts` - Arquivo principal do servidor
 -   `src/Api/` - Controladores e rotas da API
--   `src/Infra/` - Repositórios e banco de dados
+-   `src/Infra/` - Repositórios, banco de dados e autenticação
 -   `src/entities/` - Entidades do domínio da aplicação
 -   `src/dtos/` - Data Transfer Objects para transferência de dados
 -   `src/schemas/` - Schemas e tipos do banco de dados
@@ -56,16 +56,56 @@ npm start
 
 ## 🌐 Rotas disponíveis
 
+### 🔓 Rotas Públicas (sem autenticação)
+
 -   `GET /` - Página inicial com mensagem de boas-vindas
 -   `GET /api/status` - Status do servidor
+
+### 🔐 Rotas Protegidas (requer API Key)
+
 -   `GET /api/livros` - Lista todos os livros
 -   `GET /api/livros/:id` - Busca livro por ID
+-   `POST /api/livros` - Cria novo livro
+-   `PATCH /api/livros/:id` - Atualiza livro existente
+-   `DELETE /api/livros/:id` - Remove livro
+
+## 🔑 Autenticação
+
+O projeto implementa **autenticação baseada em API Key** para proteger as rotas de livros:
+
+### Como usar:
+
+```bash
+# Header x-api-key
+curl -H "x-api-key: infnet-2024-secret-key" http://localhost:3000/api/livros
+
+# Header Authorization
+curl -H "Authorization: infnet-2024-secret-key" http://localhost:3000/api/livros
+```
+
+### Configuração:
+
+-   **API Key padrão:** `infnet-2024-secret-key`
+-   **Variável de ambiente:** `API_KEY` (opcional)
+-   **Headers aceitos:** `x-api-key` ou `authorization`
+
+## ✅ Validação de Dados
+
+O projeto usa **Express Validator** para validação de entrada:
+
+### Validações implementadas:
+
+-   **ID numérico** para rotas com parâmetro `:id`
+-   **Campos obrigatórios** para criação de livros (título, autor, ano)
+-   **Mensagens de erro personalizadas** em português
+-   **Status HTTP apropriados** (400 para validação, 401 para autenticação, 403 para acesso negado)
 
 ## 📝 Tecnologias utilizadas
 
 -   TypeScript
 -   Express.js
 -   Node.js
+-   Express Validator (validação de dados)
 -   ESLint 9.x (configuração moderna flat config)
 -   Nodemon (para auto-reload em desenvolvimento)
 
@@ -103,6 +143,9 @@ O projeto inclui Nodemon configurado para:
 ## 🎯 Funcionalidades
 
 -   **API REST** com Express
+-   **Autenticação por API Key** para rotas protegidas
+-   **Validação de dados** com Express Validator
+-   **CRUD completo** de livros com validações
 -   **Repositório de dados** usando arquivo JSON
 -   **Tipagem forte** com TypeScript
 -   **Estrutura modular** com separação de responsabilidades
@@ -119,7 +162,7 @@ O projeto segue uma arquitetura limpa e organizada:
 -   **`schemas/`** - Tipos e schemas do banco de dados
 -   **`types/`** - Arquivo centralizador de exportações
 -   **`Api/`** - Controladores e rotas da API
--   **`Infra/`** - Repositórios e infraestrutura
+-   **`Infra/`** - Repositórios, infraestrutura e autenticação
 
 Esta organização facilita a manutenção, escalabilidade e legibilidade do código.
 
@@ -135,5 +178,45 @@ Para fazer deploy em produção:
 
 1. Execute `npm run build` para compilar
 2. Use `npm start` para executar a versão compilada
-3. Configure variáveis de ambiente se necessário
+3. Configure variáveis de ambiente se necessário (ex: `API_KEY`)
 4. Use um process manager como PM2 para produção
+
+## 🔒 Segurança
+
+-   **Autenticação obrigatória** para operações de livros
+-   **Validação de entrada** para prevenir dados inválidos
+-   **Headers seguros** para transmissão de credenciais
+-   **Mensagens de erro genéricas** para não expor informações sensíveis
+
+## 📚 Exemplos de Uso
+
+### Criar um livro:
+
+```bash
+curl -X POST http://localhost:3000/api/livros \
+  -H "x-api-key: infnet-2024-secret-key" \
+  -H "Content-Type: application/json" \
+  -d '{"titulo":"O Senhor dos Anéis","autor":"J.R.R. Tolkien","ano":1954}'
+```
+
+### Buscar livro por ID:
+
+```bash
+curl -H "x-api-key: infnet-2024-secret-key" http://localhost:3000/api/livros/1
+```
+
+### Atualizar livro:
+
+```bash
+curl -X PATCH http://localhost:3000/api/livros/1 \
+  -H "x-api-key: infnet-2024-secret-key" \
+  -H "Content-Type: application/json" \
+  -d '{"titulo":"O Senhor dos Anéis - Edição Atualizada"}'
+```
+
+### Deletar livro:
+
+```bash
+curl -X DELETE http://localhost:3000/api/livros/1 \
+  -H "x-api-key: infnet-2024-secret-key"
+```

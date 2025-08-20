@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 class Auth {
-    private static readonly API_KEY = process.env.API_KEY || 'infnet-2024-secret-key';
+    private static readonly API_KEY = process.env.API_KEY || 'infnet-2025-secret-key';
 
     private static verificarApiKey(req: Request, res: Response, next: NextFunction) {
         const apiKey = req.headers['x-api-key'] || req.headers['authorization'];

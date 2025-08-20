@@ -77,15 +77,15 @@ O projeto implementa **autenticação baseada em API Key** para proteger as rota
 
 ```bash
 # Header x-api-key
-curl -H "x-api-key: infnet-2024-secret-key" http://localhost:3000/api/livros
+curl -H "x-api-key: infnet-2025-secret-key" http://localhost:3000/api/livros
 
 # Header Authorization
-curl -H "Authorization: infnet-2024-secret-key" http://localhost:3000/api/livros
+curl -H "Authorization: infnet-2025-secret-key" http://localhost:3000/api/livros
 ```
 
 ### Configuração:
 
--   **API Key padrão:** `infnet-2024-secret-key`
+-   **API Key padrão:** `infnet-2025-secret-key`
 -   **Variável de ambiente:** `API_KEY` (opcional)
 -   **Headers aceitos:** `x-api-key` ou `authorization`
 
@@ -194,7 +194,7 @@ Para fazer deploy em produção:
 
 ```bash
 curl -X POST http://localhost:3000/api/livros \
-  -H "x-api-key: infnet-2024-secret-key" \
+  -H "x-api-key: infnet-2025-secret-key" \
   -H "Content-Type: application/json" \
   -d '{"titulo":"O Senhor dos Anéis","autor":"J.R.R. Tolkien","ano":1954}'
 ```
@@ -202,14 +202,14 @@ curl -X POST http://localhost:3000/api/livros \
 ### Buscar livro por ID:
 
 ```bash
-curl -H "x-api-key: infnet-2024-secret-key" http://localhost:3000/api/livros/1
+curl -H "x-api-key: infnet-2025-secret-key" http://localhost:3000/api/livros/1
 ```
 
 ### Atualizar livro:
 
 ```bash
 curl -X PATCH http://localhost:3000/api/livros/1 \
-  -H "x-api-key: infnet-2024-secret-key" \
+  -H "x-api-key: infnet-2025-secret-key" \
   -H "Content-Type: application/json" \
   -d '{"titulo":"O Senhor dos Anéis - Edição Atualizada"}'
 ```
@@ -218,5 +218,5 @@ curl -X PATCH http://localhost:3000/api/livros/1 \
 
 ```bash
 curl -X DELETE http://localhost:3000/api/livros/1 \
-  -H "x-api-key: infnet-2024-secret-key"
+  -H "x-api-key: infnet-2025-secret-key"
 ```

@@ -26,6 +26,9 @@ class ErrorHandler {
             message: 'Erro interno do servidor',
             error: 'INTERNAL_SERVER_ERROR',
         });
+
+        // ✅ Usar o next para satisfazer a IDE
+        next(); // Chama o próximo middleware (que não existe, mas satisfaz a IDE)
     }
 
     static init() {

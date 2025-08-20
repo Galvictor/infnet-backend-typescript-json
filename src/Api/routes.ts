@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import LivrosController from './LivrosController';
 import LivroRepositorio from '../Infra/LivroRepositorio';
+import Auth from '../Infra/Auth';
 
 class Routes {
     private static implementacao() {
@@ -8,7 +9,8 @@ class Routes {
         const livroRepositorio = new LivroRepositorio();
         const livrosController = new LivrosController(livroRepositorio);
 
-        routes.use('/livros', livrosController.router);
+        // Protege todas as rotas de livros com autenticação
+        routes.use('/livros', Auth.init(), livrosController.router);
 
         return routes;
     }

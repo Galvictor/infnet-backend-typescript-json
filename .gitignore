@@ -111,3 +111,7 @@ temp/
 
 # Local development
 .local/
+
+#lock files
+package-lock.json
+yarn.lock

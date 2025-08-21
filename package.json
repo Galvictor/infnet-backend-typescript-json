@@ -10,7 +10,8 @@
         "dev:watch": "nodemon --exec ts-node src/main.ts",
         "watch": "tsc --watch",
         "lint": "eslint src/**/*.ts",
-        "lint:fix": "eslint src/**/*.ts --fix"
+        "lint:fix": "eslint src/**/*.ts --fix",
+        "test": "jest"
     },
     "keywords": [
         "typescript",
@@ -29,12 +30,15 @@
         "@eslint/markdown": "^7.1.0",
         "@types/express": "^4.17.21",
         "@types/express-validator": "^3.0.2",
+        "@types/jest": "^30.0.0",
         "@types/node": "^24.2.0",
         "@typescript-eslint/utils": "^8.39.1",
         "eslint": "^9.33.0",
         "globals": "^16.3.0",
+        "jest": "^30.0.5",
         "jiti": "^2.5.1",
         "nodemon": "^3.0.2",
+        "ts-jest": "^29.4.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.2",
         "typescript-eslint": "^8.39.0"

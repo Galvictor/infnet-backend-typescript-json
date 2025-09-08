@@ -1,8 +1,9 @@
 import { DBSchema, LivroSchema, AtualizarLivroDTO, Livro } from '../types';
+import { ILivroRepositorio } from './LivroRepositorioInterface';
 import path from 'path';
 import fs from 'fs';
 
-export default class LivroRepositorio {
+export default class LivroRepositorio implements ILivroRepositorio {
     dbPath: string;
 
     constructor(caminho: string = 'fakeDB.json') {

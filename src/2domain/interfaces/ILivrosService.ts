@@ -1,4 +1,4 @@
-import { CriarLivroDTO, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../types';
+import { CriarLivroDTO, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../../types';
 
 export interface ILivrosService {
     listarLivros(): LivroSchema[];

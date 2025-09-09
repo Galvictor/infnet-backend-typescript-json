@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { CriarLivroDTO, AtualizarLivroDTO, ILivrosService } from '../types';
+import { CriarLivroDTO, AtualizarLivroDTO, ILivrosService } from '../../types';
 import { body, param, validationResult } from 'express-validator';
 
 export default class LivrosController {

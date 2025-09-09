@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import LivrosController from './LivrosController';
-import LivrosService from './LivrosService';
-import LivroRepositorio from '../Infra/LivroRepositorio';
-import Auth from '../Infra/Auth';
+import LivrosController from './controllers/LivrosController';
+import LivrosService from '../2domain/services/LivrosService';
+import LivroRepositorio from '../3infra/repositorios/LivroRepositorio';
+import Auth from '../3infra/middlewares/Auth';
 
 class Routes {
     private static implementacao() {

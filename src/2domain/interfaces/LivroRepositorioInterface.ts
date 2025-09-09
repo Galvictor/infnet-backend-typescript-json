@@ -1,4 +1,4 @@
-import { LivroSchema, AtualizarLivroDTO, Livro } from '../types';
+import { LivroSchema, AtualizarLivroDTO, Livro } from '../../types';
 
 export interface ILivroRepositorio {
     listarLivros(): LivroSchema[];

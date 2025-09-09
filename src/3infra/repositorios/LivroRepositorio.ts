@@ -1,7 +1,8 @@
-import { DBSchema, LivroSchema, AtualizarLivroDTO, Livro } from '../types';
-import { ILivroRepositorio } from './LivroRepositorioInterface';
+import { LivroSchema, AtualizarLivroDTO, Livro } from '../../types';
+import { ILivroRepositorio } from '../../2domain/interfaces/LivroRepositorioInterface';
 import path from 'path';
 import fs from 'fs';
+import { DBSchema } from './DBSchema';
 
 export default class LivroRepositorio implements ILivroRepositorio {
     dbPath: string;
@@ -32,7 +33,7 @@ export default class LivroRepositorio implements ILivroRepositorio {
 
     public getLivroPorId(id: number): LivroSchema | null {
         const db = this.acessarDB();
-        return db.livros.find((livro) => livro.id === id) || null;
+        return db.livros.find((livro: LivroSchema) => livro.id === id) || null;
     }
 
     public criarLivro(livro: Livro): LivroSchema[] {
@@ -46,7 +47,7 @@ export default class LivroRepositorio implements ILivroRepositorio {
 
     public atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): LivroSchema | null {
         const db = this.acessarDB();
-        const index = db.livros.findIndex((livro) => livro.id === id);
+        const index = db.livros.findIndex((livro: LivroSchema) => livro.id === id);
 
         if (index === -1) {
             return null;
@@ -64,7 +65,7 @@ export default class LivroRepositorio implements ILivroRepositorio {
 
     public deletarLivroPorId(id: number): boolean {
         const db = this.acessarDB();
-        const index = db.livros.findIndex((livro) => livro.id === id);
+        const index = db.livros.findIndex((livro: LivroSchema) => livro.id === id);
 
         if (index === -1) {
             return false;

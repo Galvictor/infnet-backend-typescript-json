@@ -1,6 +1,6 @@
-import { ILivroRepositorio, CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../types';
-import { ILivrosService } from './ILivrosService';
-import { NotFoundError } from './Exceptions/NotFoundError';
+import { ILivroRepositorio, CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../../types';
+import { ILivrosService } from '../interfaces/ILivrosService';
+import { NotFoundError } from '../exceptions/NotFoundError';
 
 export default class LivrosService implements ILivrosService {
     private readonly livroRepositorio: ILivroRepositorio;

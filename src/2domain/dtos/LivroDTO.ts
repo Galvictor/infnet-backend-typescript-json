@@ -1,4 +1,4 @@
-import { Livro } from '../entities/Livro';
+import { Livro } from '../../1entidades/Livro';
 
 export type CriarLivroDTO = Omit<Livro, 'id'>;
 

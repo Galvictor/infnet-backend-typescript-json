@@ -1,13 +1,13 @@
 // Entidades
-export { Livro } from '../entities/Livro';
+export { Livro } from '../1entidades/Livro';
 
 // DTOs
-export type { CriarLivroDTO, ViewLivroDTO, AtualizarLivroDTO } from '../dtos/LivroDTO';
+export type { CriarLivroDTO, ViewLivroDTO, AtualizarLivroDTO } from '../2domain/dtos/LivroDTO';
 
 // Schemas
-export type { LivroSchema } from '../schemas/LivroSchema';
-export type { DBSchema } from '../schemas/DBSchema';
+export type { LivroSchema } from '../3infra/repositorios/LivroSchema';
+export type { DBSchema } from '../3infra/repositorios/DBSchema';
 
 // Interfaces
-export type { ILivroRepositorio } from '../Infra/LivroRepositorioInterface';
-export type { ILivrosService } from '../Api/ILivrosService';
+export type { ILivroRepositorio } from '../2domain/interfaces/LivroRepositorioInterface';
+export type { ILivrosService } from '../2domain/interfaces/ILivrosService';

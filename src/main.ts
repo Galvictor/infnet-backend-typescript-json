@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
-import Routes from './Api/routes';
-import Logger from './Infra/Logger';
-import ErrorHandler from './Infra/ErrorHandler';
+import Routes from './4webApi/routes';
+import Logger from './3infra/middlewares/Logger';
+import ErrorHandler from './3infra/middlewares/ErrorHandler';
 const app = express();
 const PORT = process.env.PORT || 3000;
 

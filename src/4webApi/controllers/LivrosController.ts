@@ -1,12 +1,12 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { CriarLivroDTO, AtualizarLivroDTO, ILivrosService } from '../../types';
+import { CriarLivroDTO, AtualizarLivroDTO, LivrosServiceInterface } from '../../types';
 import { body, param, validationResult } from 'express-validator';
 
 export default class LivrosController {
-    private readonly livrosService: ILivrosService;
+    private readonly livrosService: LivrosServiceInterface;
     public router: Router = Router();
 
-    constructor(livrosService: ILivrosService) {
+    constructor(livrosService: LivrosServiceInterface) {
         this.livrosService = livrosService;
         this.routes();
     }

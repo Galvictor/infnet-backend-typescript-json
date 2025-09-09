@@ -1,13 +1,13 @@
 import { LivroSchema, AtualizarLivroDTO, Livro } from '../../types';
-import { ILivroRepositorio } from '../../2domain/interfaces/LivroRepositorioInterface';
+import { LivroRepositorioInterface } from '../../2domain/interfaces/LivroRepositorioInterface';
 import path from 'path';
 import fs from 'fs';
 import { DBSchema } from './DBSchema';
 
-export default class LivroRepositorio implements ILivroRepositorio {
+export default class LivroRepositorio implements LivroRepositorioInterface {
     dbPath: string;
 
-    constructor(caminho: string = 'fakeDB.json') {
+    constructor(caminho: string = process.env.DB_PATH || 'fakeDB.json') {
         this.dbPath = path.join(__dirname, caminho);
     }
 

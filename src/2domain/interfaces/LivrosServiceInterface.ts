@@ -1,6 +1,6 @@
 import { CriarLivroDTO, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../../types';
 
-export interface ILivrosService {
+export interface LivrosServiceInterface {
     listarLivros(): LivroSchema[];
     getLivroPorId(id: number): ViewLivroDTO;
     criarLivro(dadosLivro: CriarLivroDTO): LivroSchema[];

@@ -10,19 +10,31 @@ Um servidor backend simples construído com TypeScript e Express, configurado pa
 npm install
 ```
 
-### 2. Executar em desenvolvimento
+### 2. Configurar variáveis de ambiente
+
+```bash
+# Copie o arquivo de exemplo
+cp .env-example .env
+
+# Edite as variáveis conforme necessário
+# PORT=3000
+# API_KEY=infnet-2025-secret-key
+# DB_PATH=fakeDB.json
+```
+
+### 3. Executar em desenvolvimento
 
 ```bash
 npm run dev
 ```
 
-### 3. Executar com auto-reload (recomendado para desenvolvimento)
+### 4. Executar com auto-reload (recomendado para desenvolvimento)
 
 ```bash
 npm run dev:watch
 ```
 
-### 4. Build para produção
+### 5. Build para produção
 
 ```bash
 npm run build
@@ -31,18 +43,50 @@ npm start
 
 ## 📁 Estrutura do projeto
 
--   `src/main.ts` - Arquivo principal do servidor
--   `src/Api/` - Controladores e rotas da API
--   `src/Infra/` - Repositórios, banco de dados e autenticação
--   `src/entities/` - Entidades do domínio da aplicação
--   `src/dtos/` - Data Transfer Objects para transferência de dados
--   `src/schemas/` - Schemas e tipos do banco de dados
--   `src/types/` - Arquivo de índice centralizando todas as exportações
--   `dist/` - Arquivos compilados (criado após build)
--   `package.json` - Dependências e scripts
--   `tsconfig.json` - Configuração do TypeScript (CommonJS)
--   `eslint.config.ts` - Configuração moderna do ESLint (flat config)
--   `nodemon.json` - Configuração do Nodemon
+```
+src/
+├── 1entidades/                    # Entidades do domínio
+│   └── Livro.ts                   # Classe da entidade Livro
+├── 2domain/                       # Camada de domínio
+│   ├── dtos/                      # Data Transfer Objects
+│   │   └── LivroDTO.ts           # DTOs para transferência de dados
+│   ├── exceptions/                # Exceções customizadas
+│   │   ├── CustomErros.ts        # Classe base de exceções
+│   │   └── NotFoundError.ts      # Exceção para recursos não encontrados
+│   ├── interfaces/                # Interfaces e contratos
+│   │   ├── LivrosServiceInterface.ts # Interface do serviço de livros
+│   │   └── LivroRepositorioInterface.ts # Interface do repositório
+│   └── services/                  # Serviços de domínio
+│       └── LivrosService.ts      # Lógica de negócio dos livros
+├── 3infra/                        # Camada de infraestrutura
+│   ├── middlewares/               # Middlewares do Express
+│   │   ├── Auth.ts               # Middleware de autenticação
+│   │   ├── ErrorHandler.ts       # Middleware de tratamento de erros
+│   │   └── Logger.ts             # Middleware de logging
+│   └── repositorios/              # Repositórios de dados
+│       ├── LivroRepositorio.ts   # Implementação do repositório
+│       ├── LivroSchema.ts        # Schema do banco de dados
+│       ├── DBSchema.ts           # Schema do banco completo
+│       └── fakeDB.json           # Banco de dados JSON
+├── 4webApi/                       # Camada de apresentação
+│   ├── controllers/               # Controladores da API
+│   │   └── LivrosController.ts   # Controlador de livros
+│   └── routes.ts                 # Configuração das rotas
+├── __tests__/                     # Testes automatizados
+│   └── app.spec.ts               # Testes da aplicação
+├── main.ts                        # Arquivo principal do servidor
+└── types/                         # Centralizador de tipos
+    └── index.ts                   # Exportações centralizadas
+
+# Arquivos de configuração
+├── .env                          # Variáveis de ambiente (criar a partir do .env-example)
+├── .env-example                  # Exemplo de variáveis de ambiente
+├── dist/                         # Arquivos compilados (criado após build)
+├── package.json                  # Dependências e scripts
+├── tsconfig.json                 # Configuração do TypeScript (CommonJS)
+├── eslint.config.ts              # Configuração moderna do ESLint (flat config)
+└── nodemon.json                  # Configuração do Nodemon
+```
 
 ## 🔧 Scripts disponíveis
 
@@ -69,6 +113,18 @@ npm start
 -   `PATCH /api/livros/:id` - Atualiza livro existente
 -   `DELETE /api/livros/:id` - Remove livro
 
+## ⚙️ Variáveis de Ambiente
+
+O projeto usa **dotenv** para gerenciar configurações. Copie `.env-example` para `.env` e configure:
+
+| Variável    | Descrição             | Padrão                   |
+| ----------- | --------------------- | ------------------------ |
+| `PORT`      | Porta do servidor     | `3000`                   |
+| `NODE_ENV`  | Ambiente de execução  | `development`            |
+| `API_KEY`   | Chave de autenticação | `infnet-2025-secret-key` |
+| `DB_PATH`   | Caminho do banco JSON | `fakeDB.json`            |
+| `LOG_LEVEL` | Nível de log          | `info`                   |
+
 ## 🔑 Autenticação
 
 O projeto implementa **autenticação baseada em API Key** para proteger as rotas de livros:
@@ -86,7 +142,7 @@ curl -H "Authorization: infnet-2025-secret-key" http://localhost:3000/api/livros
 ### Configuração:
 
 -   **API Key padrão:** `infnet-2025-secret-key`
--   **Variável de ambiente:** `API_KEY` (opcional)
+-   **Variável de ambiente:** `API_KEY` (definida no `.env`)
 -   **Headers aceitos:** `x-api-key` ou `authorization`
 
 ## ✅ Validação de Dados
@@ -106,6 +162,7 @@ O projeto usa **Express Validator** para validação de entrada:
 -   Express.js
 -   Node.js
 -   Express Validator (validação de dados)
+-   Dotenv (gerenciamento de variáveis de ambiente)
 -   ESLint 9.x (configuração moderna flat config)
 -   Nodemon (para auto-reload em desenvolvimento)
 
@@ -122,23 +179,25 @@ O projeto está configurado para usar **CommonJS**:
 
 O projeto inclui ESLint 9.x configurado com a nova sintaxe flat config:
 
--   Configuração moderna usando `eslint.config.ts`
--   Verificação de sintaxe e boas práticas
--   Regras específicas para TypeScript
--   Formatação automática do código
--   Detecção de problemas comuns
--   Suporte a módulos CommonJS
--   Reconhecimento de variáveis globais do Node.js (incluindo `__dirname`)
--   Suporte nativo a arquivos de configuração TypeScript
+-   **Configuração moderna** usando `eslint.config.ts`
+-   **Verificação de sintaxe** e boas práticas
+-   **Regras específicas** para TypeScript
+-   **Formatação automática** do código
+-   **Detecção de problemas** comuns
+-   **Suporte a módulos CommonJS**
+-   **Reconhecimento de variáveis globais** do Node.js (incluindo `__dirname`)
+-   **Suporte nativo** a arquivos de configuração TypeScript
+-   **Estrutura organizada** que facilita a manutenção do código
 
 ## 🔄 Auto-reload com Nodemon
 
 O projeto inclui Nodemon configurado para:
 
--   Monitorar alterações nos arquivos `.ts`, `.js` e `.json`
--   Reiniciar automaticamente o servidor quando houver mudanças
--   Ignorar arquivos de teste e build
--   Delay de 1 segundo para evitar reinicializações excessivas
+-   **Monitorar alterações** nos arquivos `.ts`, `.js` e `.json`
+-   **Reiniciar automaticamente** o servidor quando houver mudanças
+-   **Ignorar arquivos** de teste e build
+-   **Delay de 1 segundo** para evitar reinicializações excessivas
+-   **Funciona perfeitamente** com a nova estrutura de pastas
 
 ## 🎯 Funcionalidades
 
@@ -148,37 +207,72 @@ O projeto inclui Nodemon configurado para:
 -   **CRUD completo** de livros com validações
 -   **Repositório de dados** usando arquivo JSON
 -   **Tipagem forte** com TypeScript
--   **Estrutura modular** com separação de responsabilidades
--   **Organização profissional** com pastas específicas para cada tipo de arquivo
+-   **Arquitetura em camadas** com separação clara de responsabilidades
+-   **Organização profissional** com estrutura numerada e hierárquica
+-   **Gerenciamento de configurações** com dotenv
 -   **Hot reload** em desenvolvimento
 -   **Build otimizado** para produção
+-   **Estrutura escalável** para novos recursos e funcionalidades
 
 ## 🗂️ Organização do Código
 
-O projeto segue uma arquitetura limpa e organizada:
+O projeto segue uma **arquitetura em camadas** com separação clara de responsabilidades:
 
--   **`entities/`** - Classes de entidades do domínio
--   **`dtos/`** - Objetos de transferência de dados
--   **`schemas/`** - Tipos e schemas do banco de dados
--   **`types/`** - Arquivo centralizador de exportações
--   **`Api/`** - Controladores e rotas da API
--   **`Infra/`** - Repositórios, infraestrutura e autenticação
+### 🏗️ **Arquitetura em Camadas:**
 
-Esta organização facilita a manutenção, escalabilidade e legibilidade do código.
+1. **`1entidades/`** - **Camada de Entidades**
+
+    - Classes que representam os objetos de negócio
+    - Contém a lógica básica das entidades do domínio
+
+2. **`2domain/`** - **Camada de Domínio**
+
+    - **`dtos/`** - Objetos de transferência de dados
+    - **`exceptions/`** - Exceções customizadas do domínio
+    - **`interfaces/`** - Contratos e interfaces
+    - **`services/`** - Lógica de negócio e regras de domínio
+
+3. **`3infra/`** - **Camada de Infraestrutura**
+
+    - **`middlewares/`** - Middlewares do Express (Auth, Logger, ErrorHandler)
+    - **`repositorios/`** - Acesso a dados, persistência e schemas
+
+4. **`4webApi/`** - **Camada de Apresentação**
+    - **`controllers/`** - Controladores da API REST
+    - **`routes.ts`** - Configuração das rotas
+
+### 🎯 **Benefícios desta Organização:**
+
+-   ✅ **Separação clara de responsabilidades**
+-   ✅ **Fácil manutenção e evolução**
+-   ✅ **Testabilidade aprimorada**
+-   ✅ **Reutilização de código**
+-   ✅ **Escalabilidade para novos recursos**
+-   ✅ **Padrão de nomenclatura consistente**
+
+### 📝 **Nomenclatura das Pastas:**
+
+A nomenclatura com números prefixos garante uma ordem lógica de execução e dependências:
+
+-   **`1entidades/`** - Base do domínio, sem dependências
+-   **`2domain/`** - Lógica de negócio, depende das entidades
+-   **`3infra/`** - Infraestrutura, implementa interfaces do domínio
+-   **`4webApi/`** - Apresentação, orquestra todas as camadas
 
 ## 📊 Banco de Dados
 
--   **fakeDB.json** - Arquivo JSON com dados de exemplo
--   **LivroRepositorio** - Classe para gerenciar operações CRUD
--   **Esquemas tipados** - Interfaces TypeScript para validação
+-   **`src/3infra/repositorios/fakeDB.json`** - Arquivo JSON com dados de exemplo
+-   **`src/3infra/repositorios/LivroRepositorio.ts`** - Classe para gerenciar operações CRUD
+-   **`src/3infra/repositorios/LivroSchema.ts`** - Schema tipado para validação
+-   **`src/3infra/repositorios/DBSchema.ts`** - Schema do banco completo
 
 ## 🚀 Deploy
 
 Para fazer deploy em produção:
 
 1. Execute `npm run build` para compilar
-2. Use `npm start` para executar a versão compilada
-3. Configure variáveis de ambiente se necessário (ex: `API_KEY`)
+2. Configure as variáveis de ambiente no `.env` ou no sistema
+3. Use `npm start` para executar a versão compilada
 4. Use um process manager como PM2 para produção
 
 ## 🔒 Segurança
@@ -187,6 +281,9 @@ Para fazer deploy em produção:
 -   **Validação de entrada** para prevenir dados inválidos
 -   **Headers seguros** para transmissão de credenciais
 -   **Mensagens de erro genéricas** para não expor informações sensíveis
+-   **Configurações sensíveis** em variáveis de ambiente (não versionadas)
+-   **Separação de responsabilidades** que facilita auditoria de segurança
+-   **Estrutura organizada** que previne vazamentos de dados
 
 ## 📚 Exemplos de Uso
 
@@ -198,6 +295,8 @@ curl -X POST http://localhost:3000/api/livros \
   -H "Content-Type: application/json" \
   -d '{"titulo":"O Senhor dos Anéis","autor":"J.R.R. Tolkien","ano":1954}'
 ```
+
+**Nota:** A API Key pode ser configurada no arquivo `.env` com a variável `API_KEY`.
 
 ### Buscar livro por ID:
 
@@ -220,3 +319,44 @@ curl -X PATCH http://localhost:3000/api/livros/1 \
 curl -X DELETE http://localhost:3000/api/livros/1 \
   -H "x-api-key: infnet-2025-secret-key"
 ```
+
+## 🔧 Configuração Avançada
+
+### Personalizando variáveis de ambiente:
+
+```bash
+# Edite o arquivo .env
+PORT=8080
+API_KEY=minha-chave-super-secreta
+DB_PATH=meu-banco.json
+NODE_ENV=production
+```
+
+### Usando variáveis de ambiente do sistema:
+
+```bash
+# Linux/Mac
+export PORT=8080
+export API_KEY=minha-chave-super-secreta
+npm run dev
+
+# Windows
+set PORT=8080
+set API_KEY=minha-chave-super-secreta
+npm run dev
+```
+
+### Adicionando novos recursos:
+
+Com a nova estrutura, é fácil adicionar novos recursos:
+
+1. **Nova entidade**: Adicione em `src/1entidades/`
+2. **Novo DTO**: Adicione em `src/2domain/dtos/`
+3. **Nova exceção**: Adicione em `src/2domain/exceptions/`
+4. **Nova interface**: Adicione em `src/2domain/interfaces/`
+5. **Novo serviço**: Adicione em `src/2domain/services/`
+6. **Novo middleware**: Adicione em `src/3infra/middlewares/`
+7. **Novo repositório/schema**: Adicione em `src/3infra/repositorios/`
+8. **Novo controlador**: Adicione em `src/4webApi/controllers/`
+9. **Atualize as rotas**: Modifique `src/4webApi/routes.ts`
+10. **Atualize os tipos**: Modifique `src/types/index.ts`

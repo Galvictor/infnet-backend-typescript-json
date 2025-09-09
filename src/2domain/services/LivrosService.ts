@@ -1,11 +1,11 @@
-import { ILivroRepositorio, CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../../types';
-import { ILivrosService } from '../interfaces/ILivrosService';
+import { LivroRepositorioInterface, CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../../types';
+import { LivrosServiceInterface } from '../interfaces/LivrosServiceInterface';
 import { NotFoundError } from '../exceptions/NotFoundError';
 
-export default class LivrosService implements ILivrosService {
-    private readonly livroRepositorio: ILivroRepositorio;
+export default class LivrosService implements LivrosServiceInterface {
+    private readonly livroRepositorio: LivroRepositorioInterface;
 
-    constructor(livroRepositorio: ILivroRepositorio) {
+    constructor(livroRepositorio: LivroRepositorioInterface) {
         this.livroRepositorio = livroRepositorio;
     }
 

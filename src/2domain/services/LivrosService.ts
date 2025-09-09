@@ -1,6 +1,13 @@
-import { LivroRepositorioInterface, CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../../types';
-import { LivrosServiceInterface } from '../interfaces/LivrosServiceInterface';
-import { NotFoundError } from '../exceptions/NotFoundError';
+import {
+    LivroRepositorioInterface,
+    CriarLivroDTO,
+    Livro,
+    ViewLivroDTO,
+    AtualizarLivroDTO,
+    LivroSchema,
+    LivrosServiceInterface,
+    NotFoundError,
+} from '../../types';
 
 export default class LivrosService implements LivrosServiceInterface {
     private readonly livroRepositorio: LivroRepositorioInterface;

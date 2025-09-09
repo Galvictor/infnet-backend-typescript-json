@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import CustomError from '../../2domain/exceptions/CustomErros';
+import { CustomError } from '../../types';
 
 class ErrorHandler {
     private static tratarErro(err: Error, req: Request, res: Response, next: NextFunction) {

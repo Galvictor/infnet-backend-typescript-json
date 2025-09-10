@@ -41,6 +41,10 @@ npm run build
 npm start
 ```
 
+## 📚 Documentação
+
+-   **[README-INVERSIFY.md](./README-INVERSIFY.md)** - Documentação completa sobre Inversify e Injeção de Dependência
+
 ## 📁 Estrutura do projeto
 
 ```
@@ -163,6 +167,8 @@ O projeto usa **Express Validator** para validação de entrada:
 -   Node.js
 -   Express Validator (validação de dados)
 -   Dotenv (gerenciamento de variáveis de ambiente)
+-   Inversify (injeção de dependência)
+-   Reflect-metadata (suporte a decoradores)
 -   ESLint 9.x (configuração moderna flat config)
 -   Nodemon (para auto-reload em desenvolvimento)
 
@@ -319,6 +325,20 @@ curl -X PATCH http://localhost:3000/api/livros/1 \
 curl -X DELETE http://localhost:3000/api/livros/1 \
   -H "x-api-key: infnet-2025-secret-key"
 ```
+
+## 🔄 Inversify - Injeção de Dependência
+
+O projeto utiliza **Inversify** para gerenciar dependências de forma automática e desacoplada.
+
+### Como funciona:
+
+-   **Container centralizado** em `src/4webApi/config/InversifyConfig.ts`
+-   **Decoradores** `@injectable()` e `@inject()` para injeção automática
+-   **Resolução automática** de dependências: Controller → Service → Repository
+
+### Documentação completa:
+
+📖 **[README-INVERSIFY.md](./README-INVERSIFY.md)** - Guia detalhado sobre Inversify
 
 ## 🔧 Configuração Avançada
 

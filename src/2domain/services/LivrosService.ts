@@ -1,3 +1,4 @@
+import { injectable, inject } from 'inversify';
 import {
     LivroRepositorioInterface,
     CriarLivroDTO,
@@ -9,10 +10,11 @@ import {
     NotFoundError,
 } from '../../types';
 
+@injectable()
 export default class LivrosService implements LivrosServiceInterface {
     private readonly livroRepositorio: LivroRepositorioInterface;
 
-    constructor(livroRepositorio: LivroRepositorioInterface) {
+    constructor(@inject('LivroRepositorio') livroRepositorio: LivroRepositorioInterface) {
         this.livroRepositorio = livroRepositorio;
     }
 

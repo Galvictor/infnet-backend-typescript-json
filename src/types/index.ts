@@ -22,7 +22,13 @@ export { default as LivrosService } from '../2domain/services/LivrosService';
 // Repositórios
 export { default as LivroRepositorio } from '../3infra/repositorios/LivroRepositorio';
 
+// Controllers
+export { default as LivrosController } from '../4webApi/controllers/LivrosController';
+
 // Middlewares
 export { default as Auth } from '../3infra/middlewares/Auth';
 export { default as ErrorHandler } from '../3infra/middlewares/ErrorHandler';
 export { default as Logger } from '../3infra/middlewares/Logger';
+
+// Container
+export { default as container } from '../4webApi/config/InversifyConfig';

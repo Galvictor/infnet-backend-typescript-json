@@ -1,13 +1,11 @@
 import { Router } from 'express';
-import LivrosController from './controllers/LivrosController';
-import { LivrosService, LivroRepositorio, Auth } from '../types';
+import container from './config/InversifyConfig';
+import { Auth, LivrosController } from '../types';
 
 class Routes {
     private static implementacao() {
         const routes = Router();
-        const livroRepositorio = new LivroRepositorio();
-        const livrosService = new LivrosService(livroRepositorio);
-        const livrosController = new LivrosController(livrosService);
+        const livrosController = container.get<LivrosController>('LivrosController');
 
         // Protege todas as rotas de livros com autenticação
         routes.use('/livros', Auth.init(), livrosController.router);

@@ -1,9 +1,11 @@
+import { injectable } from 'inversify';
 import { LivroSchema, AtualizarLivroDTO, Livro } from '../../types';
 import { LivroRepositorioInterface } from '../../2domain/interfaces/LivroRepositorioInterface';
 import path from 'path';
 import fs from 'fs';
 import { DBSchema } from './DBSchema';
 
+@injectable()
 export default class LivroRepositorio implements LivroRepositorioInterface {
     dbPath: string;
 

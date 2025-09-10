@@ -1,12 +1,14 @@
+import { injectable, inject } from 'inversify';
 import { Router, Request, Response, NextFunction } from 'express';
 import { CriarLivroDTO, AtualizarLivroDTO, LivrosServiceInterface } from '../../types';
 import { body, param, validationResult } from 'express-validator';
 
+@injectable()
 export default class LivrosController {
     private readonly livrosService: LivrosServiceInterface;
     public router: Router = Router();
 
-    constructor(livrosService: LivrosServiceInterface) {
+    constructor(@inject('LivrosService') livrosService: LivrosServiceInterface) {
         this.livrosService = livrosService;
         this.routes();
     }

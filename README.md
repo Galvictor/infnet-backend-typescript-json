@@ -44,6 +44,7 @@ npm start
 ## 📚 Documentação
 
 -   **[README-INVERSIFY.md](./README-INVERSIFY.md)** - Documentação completa sobre Inversify e Injeção de Dependência
+-   **[README-ASYNC.md](./README-ASYNC.md)** - Implementações Assíncronas com Async/Await
 
 ## 📁 Estrutura do projeto
 
@@ -59,22 +60,30 @@ src/
 │   │   └── NotFoundError.ts      # Exceção para recursos não encontrados
 │   ├── interfaces/                # Interfaces e contratos
 │   │   ├── LivrosServiceInterface.ts # Interface do serviço de livros
-│   │   └── LivroRepositorioInterface.ts # Interface do repositório
+│   │   ├── LivrosAsyncServiceInterface.ts # Interface do serviço assíncrono
+│   │   ├── LivroRepositorioInterface.ts # Interface do repositório
+│   │   └── LivroAsyncRepositorioInterface.ts # Interface do repositório assíncrono
 │   └── services/                  # Serviços de domínio
-│       └── LivrosService.ts      # Lógica de negócio dos livros
+│       ├── LivrosService.ts      # Lógica de negócio dos livros
+│       ├── LivrosAsyncService.ts # Serviço assíncrono para FileSystem
+│       └── LivrosAsyncMongoService.ts # Serviço assíncrono para MongoDB
 ├── 3infra/                        # Camada de infraestrutura
 │   ├── middlewares/               # Middlewares do Express
 │   │   ├── Auth.ts               # Middleware de autenticação
 │   │   ├── ErrorHandler.ts       # Middleware de tratamento de erros
 │   │   └── Logger.ts             # Middleware de logging
 │   └── repositorios/              # Repositórios de dados
-│       ├── LivroRepositorio.ts   # Implementação do repositório
+│       ├── LivroRepositorio.ts   # Implementação do repositório síncrono
+│       ├── LivroAsyncRepositorio.ts # Repositório assíncrono para FileSystem
+│       ├── LivroAsyncMongoRepositorio.ts # Repositório assíncrono para MongoDB
 │       ├── LivroSchema.ts        # Schema do banco de dados
 │       ├── DBSchema.ts           # Schema do banco completo
 │       └── fakeDB.json           # Banco de dados JSON
 ├── 4webApi/                       # Camada de apresentação
 │   ├── controllers/               # Controladores da API
-│   │   └── LivrosController.ts   # Controlador de livros
+│   │   ├── LivrosController.ts   # Controlador síncrono
+│   │   ├── LivrosAsyncController.ts # Controlador assíncrono para FileSystem
+│   │   └── LivrosAsyncMongoController.ts # Controlador assíncrono para MongoDB
 │   └── routes.ts                 # Configuração das rotas
 ├── __tests__/                     # Testes automatizados
 │   └── app.spec.ts               # Testes da aplicação
@@ -339,6 +348,28 @@ O projeto utiliza **Inversify** para gerenciar dependências de forma automátic
 ### Documentação completa:
 
 📖 **[README-INVERSIFY.md](./README-INVERSIFY.md)** - Guia detalhado sobre Inversify
+
+## ⚡ Implementações Assíncronas
+
+O projeto inclui implementações assíncronas completas para demonstrar o uso de **async/await** e **Promises**:
+
+### Arquivos Assíncronos Criados:
+
+-   **Repositórios**: `LivroAsyncRepositorio.ts`, `LivroAsyncMongoRepositorio.ts`
+-   **Serviços**: `LivrosAsyncService.ts`, `LivrosAsyncMongoService.ts`
+-   **Controllers**: `LivrosAsyncController.ts`, `LivrosAsyncMongoController.ts`
+-   **Interfaces**: `LivroAsyncRepositorioInterface.ts`, `LivrosAsyncServiceInterface.ts`
+
+### Benefícios:
+
+-   **Performance**: Operações I/O não-bloqueantes
+-   **Escalabilidade**: Melhor utilização de recursos
+-   **Concorrência**: Múltiplas operações simultâneas
+-   **Padrões modernos**: async/await é mais legível que callbacks
+
+### Documentação completa:
+
+📖 **[README-ASYNC.md](./README-ASYNC.md)** - Guia detalhado sobre implementações assíncronas
 
 ## 🔧 Configuração Avançada
 

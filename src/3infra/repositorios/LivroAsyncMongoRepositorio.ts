@@ -1,8 +1,7 @@
 import { injectable } from 'inversify';
-import { LivroAsyncRepositorioInterface } from '../../2domain/interfaces/LivroAsyncRepositorioInterface';
 import dotenv from 'dotenv';
 import { Collection, MongoClient, ObjectId, ServerApiVersion } from 'mongodb';
-import { AtualizarLivroDTO, Livro, LivroSchema } from '../../types';
+import { AtualizarLivroDTO, Livro, LivroSchema, LivroAsyncRepositorioInterface } from '../../types';
 
 dotenv.config();
 

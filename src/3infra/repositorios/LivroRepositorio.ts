@@ -1,6 +1,5 @@
 import { injectable } from 'inversify';
-import { LivroSchema, AtualizarLivroDTO, Livro } from '../../types';
-import { LivroRepositorioInterface } from '../../2domain/interfaces/LivroRepositorioInterface';
+import { LivroSchema, AtualizarLivroDTO, Livro, LivroRepositorioInterface } from '../../types';
 import path from 'path';
 import fs from 'fs';
 import { DBSchema } from './DBSchema';

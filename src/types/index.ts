@@ -11,6 +11,8 @@ export type { DBSchema } from '../3infra/repositorios/DBSchema';
 // Interfaces
 export type { LivroRepositorioInterface } from '../2domain/interfaces/LivroRepositorioInterface';
 export type { LivrosServiceInterface } from '../2domain/interfaces/LivrosServiceInterface';
+export type { LivrosAsyncServiceInterface } from '../2domain/interfaces/LivrosAsyncServiceInterface';
+export type { LivroAsyncRepositorioInterface } from '../2domain/interfaces/LivroAsyncRepositorioInterface';
 
 // Exceções
 export { default as CustomError } from '../2domain/exceptions/CustomErros';
@@ -21,6 +23,8 @@ export { default as LivrosService } from '../2domain/services/LivrosService';
 
 // Repositórios
 export { default as LivroRepositorio } from '../3infra/repositorios/LivroRepositorio';
+export { default as LivroAsyncMongoRepositorio } from '../3infra/repositorios/LivroAsyncMongoRepositorio';
+export { default as LivroAsyncRepositorio } from '../3infra/repositorios/LivroAsyncRepositorio';
 
 // Controllers
 export { default as LivrosController } from '../4webApi/controllers/LivrosController';

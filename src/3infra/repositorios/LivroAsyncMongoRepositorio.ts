@@ -7,7 +7,11 @@ dotenv.config();
 
 @injectable()
 export default class LivroAsyncMongoRepositorio implements LivroAsyncRepositorioInterface {
-    constructor(private uri: string, private dbName: string, private collectionName: string) {
+    private uri: string;
+    private dbName: string;
+    private collectionName: string;
+
+    constructor() {
         this.uri = process.env.MONGO_URI || '';
         this.dbName = process.env.MONGO_DB_NAME || '';
         this.collectionName = process.env.MONGO_COLLECTION_NAME || '';

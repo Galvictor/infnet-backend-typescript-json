@@ -20,14 +20,18 @@ export { NotFoundError } from '../2domain/exceptions/NotFoundError';
 
 // Serviços
 export { default as LivrosService } from '../2domain/services/LivrosService';
+export { default as LivrosAsyncService } from '../2domain/services/LivrosAsyncService';
+export { default as LivrosAsyncMongoService } from '../2domain/services/LivrosAsyncMongoService';
 
 // Repositórios
 export { default as LivroRepositorio } from '../3infra/repositorios/LivroRepositorio';
-export { default as LivroAsyncMongoRepositorio } from '../3infra/repositorios/LivroAsyncMongoRepositorio';
 export { default as LivroAsyncRepositorio } from '../3infra/repositorios/LivroAsyncRepositorio';
+export { default as LivroAsyncMongoRepositorio } from '../3infra/repositorios/LivroAsyncMongoRepositorio';
 
 // Controllers
 export { default as LivrosController } from '../4webApi/controllers/LivrosController';
+export { default as LivrosAsyncController } from '../4webApi/controllers/LivrosAsyncController';
+export { default as LivrosAsyncMongoController } from '../4webApi/controllers/LivrosAsyncMongoController';
 
 // Middlewares
 export { default as Auth } from '../3infra/middlewares/Auth';

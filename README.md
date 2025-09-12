@@ -45,6 +45,7 @@ npm start
 
 -   **[README-INVERSIFY.md](./README-INVERSIFY.md)** - Documentação completa sobre Inversify e Injeção de Dependência
 -   **[README-ASYNC.md](./README-ASYNC.md)** - Implementações Assíncronas com Async/Await
+-   **[exemplo-uso-async.md](./exemplo-uso-async.md)** - Exemplos de Uso e Testes das Rotas Assíncronas
 
 ## 📁 Estrutura do projeto
 
@@ -120,11 +121,31 @@ src/
 
 ### 🔐 Rotas Protegidas (requer API Key)
 
--   `GET /api/livros` - Lista todos os livros
--   `GET /api/livros/:id` - Busca livro por ID
--   `POST /api/livros` - Cria novo livro
--   `PATCH /api/livros/:id` - Atualiza livro existente
--   `DELETE /api/livros/:id` - Remove livro
+#### **Síncronas (Implementação Original)**
+
+-   `GET /api/livros` - Lista todos os livros (síncrono)
+-   `GET /api/livros/:id` - Busca livro por ID (síncrono)
+-   `POST /api/livros` - Cria novo livro (síncrono)
+-   `PATCH /api/livros/:id` - Atualiza livro existente (síncrono)
+-   `DELETE /api/livros/:id` - Remove livro (síncrono)
+
+#### **Assíncronas FileSystem (Async/Await)**
+
+-   `GET /api/livros-async` - Lista todos os livros (assíncrono FileSystem)
+-   `GET /api/livros-async/:id` - Busca livro por ID (assíncrono FileSystem)
+-   `POST /api/livros-async` - Cria novo livro (assíncrono FileSystem)
+-   `PATCH /api/livros-async/:id` - Atualiza livro existente (assíncrono FileSystem)
+-   `DELETE /api/livros-async/:id` - Remove livro (assíncrono FileSystem)
+
+#### **Assíncronas MongoDB (Async/Await)**
+
+-   `GET /api/livros-mongo` - Lista todos os livros (assíncrono MongoDB)
+-   `GET /api/livros-mongo/:id` - Busca livro por ID (assíncrono MongoDB)
+-   `POST /api/livros-mongo` - Cria novo livro (assíncrono MongoDB)
+-   `PATCH /api/livros-mongo/:id` - Atualiza livro existente (assíncrono MongoDB)
+-   `DELETE /api/livros-mongo/:id` - Remove livro (assíncrono MongoDB)
+
+> 📖 **Para exemplos de uso e testes completos, consulte:** [exemplo-uso-async.md](./exemplo-uso-async.md)
 
 ## ⚙️ Variáveis de Ambiente
 
@@ -367,9 +388,19 @@ O projeto inclui implementações assíncronas completas para demonstrar o uso d
 -   **Concorrência**: Múltiplas operações simultâneas
 -   **Padrões modernos**: async/await é mais legível que callbacks
 
+### Tipos de Implementação Disponíveis:
+
+| Tipo                      | Rota Base           | Descrição               | Banco de Dados |
+| ------------------------- | ------------------- | ----------------------- | -------------- |
+| **Síncrono**              | `/api/livros`       | Implementação original  | Arquivo JSON   |
+| **Assíncrono FileSystem** | `/api/livros-async` | Async/await com arquivo | Arquivo JSON   |
+| **Assíncrono MongoDB**    | `/api/livros-mongo` | Async/await com MongoDB | MongoDB        |
+
 ### Documentação completa:
 
 📖 **[README-ASYNC.md](./README-ASYNC.md)** - Guia detalhado sobre implementações assíncronas
+
+📖 **[exemplo-uso-async.md](./exemplo-uso-async.md)** - Exemplos práticos e testes de todas as rotas
 
 ## 🔧 Configuração Avançada
 

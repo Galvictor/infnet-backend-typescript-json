@@ -7,10 +7,10 @@ import LivrosService from '../../2domain/services/LivrosService';
 
 const container = new Container();
 
-container.bind<LivroRepositorioInterface>('LivroRepositorio').to(LivroRepositorio);
+container.bind<LivroRepositorioInterface>('LivroRepositorio').to(LivroRepositorio).inRequestScope();
 
-container.bind<LivrosServiceInterface>('LivrosService').to(LivrosService);
+container.bind<LivrosServiceInterface>('LivrosService').to(LivrosService).inRequestScope();
 
-container.bind<LivrosController>('LivrosController').to(LivrosController);
+container.bind<LivrosController>('LivrosController').to(LivrosController).inRequestScope();
 
 export default container;

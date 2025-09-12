@@ -4,6 +4,7 @@ import { LivroRepositorioInterface } from '../../2domain/interfaces/LivroReposit
 import path from 'path';
 import fs from 'fs';
 import { DBSchema } from './DBSchema';
+import { ObjectId } from 'mongodb';
 
 @injectable()
 export default class LivroRepositorio implements LivroRepositorioInterface {
@@ -40,7 +41,10 @@ export default class LivroRepositorio implements LivroRepositorioInterface {
 
     public criarLivro(livro: Livro): LivroSchema[] {
         const livros = this.listarLivros();
-        livros.push({ ...livro });
+        livros.push({
+            ...livro,
+            _id: new ObjectId(),
+        });
         const dbUpdated = this.acessarDB();
         dbUpdated.livros = livros;
         this.salvarDB(dbUpdated);

@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "titulo": "O Senhor dos Anéis - Edição Especial",
+        "autor": "J.R.R. Tolkien",
+        "ano": 1955
+    },
+    {
+        "id": 2,
+        "titulo": "O Hobbit",
+        "autor": "J.R.R. Tolkien - Edição Comentada",
+        "ano": 1937
+    },
+    {
+        "id": 3,
+        "titulo": "O Senhor dos Anéis",
+        "autor": "J.R.R. Tolkien",
+        "ano": 1954
+    },
+    {
+        "id": 4,
+        "titulo": "Duna - Edição Especial",
+        "autor": "Frank Herbert",
+        "ano": 1965
+    }
+]

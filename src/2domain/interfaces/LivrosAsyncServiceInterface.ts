@@ -1,9 +1,9 @@
-import { CriarLivroDTO, ViewLivroDTO, AtualizarLivroDTO, LivroSchema } from '../../types';
+import { CriarLivroDTO, ViewLivroDTO, AtualizarLivroDTO, Livro } from '../../types';
 
 export interface LivrosAsyncServiceInterface {
-    listarLivros(): Promise<LivroSchema[]>;
+    listarLivros(): Promise<Livro[]>;
     getLivroPorId(id: number): Promise<ViewLivroDTO>;
-    criarLivro(dadosLivro: CriarLivroDTO): Promise<LivroSchema[]>;
-    atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): Promise<LivroSchema>;
+    criarLivro(dadosLivro: CriarLivroDTO): Promise<Livro[]>;
+    atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): Promise<Livro>;
     deletarLivroPorId(id: number): Promise<void>;
 }

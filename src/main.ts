@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express, { Request, Response } from 'express';
 import Routes from './4webApi/routes';
 import { Logger, ErrorHandler } from './types';
-
+import MoongoseConfig from './3infra/dbConfig/mongooseConfig';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(Logger.init());
+
+MoongoseConfig.connect();
 
 // Rota básica
 app.get('/', (req: Request, res: Response) => {

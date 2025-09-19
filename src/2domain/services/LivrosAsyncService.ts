@@ -5,7 +5,6 @@ import {
     Livro,
     ViewLivroDTO,
     AtualizarLivroDTO,
-    LivroSchema,
     LivrosAsyncServiceInterface,
     NotFoundError,
 } from '../../types';
@@ -18,7 +17,7 @@ export default class LivrosAsyncService implements LivrosAsyncServiceInterface {
         this.livroRepositorio = livroRepositorio;
     }
 
-    public async listarLivros(): Promise<LivroSchema[]> {
+    public async listarLivros(): Promise<Livro[]> {
         return await this.livroRepositorio.listarLivros();
     }
 
@@ -35,7 +34,7 @@ export default class LivrosAsyncService implements LivrosAsyncServiceInterface {
         return viewLivro;
     }
 
-    public async criarLivro(dadosLivro: CriarLivroDTO): Promise<LivroSchema[]> {
+    public async criarLivro(dadosLivro: CriarLivroDTO): Promise<Livro[]> {
         const livrosExistentes = await this.livroRepositorio.listarLivros();
         const novoId = livrosExistentes.map((livro) => livro.id).reduce((a, b) => Math.max(a, b), 0) + 1;
 
@@ -45,7 +44,7 @@ export default class LivrosAsyncService implements LivrosAsyncServiceInterface {
         return await this.livroRepositorio.listarLivros();
     }
 
-    public async atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): Promise<LivroSchema> {
+    public async atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): Promise<Livro> {
         const livroAtualizado = await this.livroRepositorio.atualizarLivroPorId(id, dadosAtualizados);
 
         if (!livroAtualizado) {

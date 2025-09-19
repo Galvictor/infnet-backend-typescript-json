@@ -12,7 +12,7 @@ export default class LivroAsyncMongoRepositorio implements LivroAsyncRepositorio
     private collectionName: string;
 
     constructor() {
-        this.uri = process.env.MONGO_URI || '';
+        this.uri = `${process.env.MONGO_URI}?${process.env.DB_OPTIONS}` || '';
         this.dbName = process.env.MONGO_DB_NAME || '';
         this.collectionName = process.env.MONGO_COLLECTION_NAME || '';
     }

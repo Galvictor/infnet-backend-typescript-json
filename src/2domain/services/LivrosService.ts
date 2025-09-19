@@ -1,14 +1,5 @@
 import { injectable, inject } from 'inversify';
-import {
-    LivroRepositorioInterface,
-    CriarLivroDTO,
-    Livro,
-    ViewLivroDTO,
-    AtualizarLivroDTO,
-    LivroSchema,
-    LivrosServiceInterface,
-    NotFoundError,
-} from '../../types';
+import { LivroRepositorioInterface, CriarLivroDTO, Livro, ViewLivroDTO, AtualizarLivroDTO, LivrosServiceInterface, NotFoundError } from '../../types';
 
 @injectable()
 export default class LivrosService implements LivrosServiceInterface {
@@ -18,7 +9,7 @@ export default class LivrosService implements LivrosServiceInterface {
         this.livroRepositorio = livroRepositorio;
     }
 
-    public listarLivros(): LivroSchema[] {
+    public listarLivros(): Livro[] {
         return this.livroRepositorio.listarLivros();
     }
 
@@ -35,7 +26,7 @@ export default class LivrosService implements LivrosServiceInterface {
         return viewLivro;
     }
 
-    public criarLivro(dadosLivro: CriarLivroDTO): LivroSchema[] {
+    public criarLivro(dadosLivro: CriarLivroDTO): Livro[] {
         const livrosExistentes = this.livroRepositorio.listarLivros();
         const novoId = livrosExistentes.map((livro) => livro.id).reduce((a, b) => Math.max(a, b), 0) + 1;
 
@@ -45,7 +36,7 @@ export default class LivrosService implements LivrosServiceInterface {
         return this.livroRepositorio.listarLivros();
     }
 
-    public atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): LivroSchema {
+    public atualizarLivroPorId(id: number, dadosAtualizados: AtualizarLivroDTO): Livro {
         const livroAtualizado = this.livroRepositorio.atualizarLivroPorId(id, dadosAtualizados);
 
         if (!livroAtualizado) {
